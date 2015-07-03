@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:textColor="@color/main"
+        android:layout_height="380dp"
+        android:textIsSelectable="true"
+        android:textSize="16dp"
+        android:id="@+id/postText"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/page_buttons"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/viewImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/main"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:text="@string/image_view"
+            style="?android:attr/borderlessButtonStyle">
+        </Button>
+        <Button
+            android:id="@+id/sendEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/main"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:text="@string/send_email"
+            style="?android:attr/borderlessButtonStyle">
+        </Button>
+        </LinearLayout>
+</LinearLayout>

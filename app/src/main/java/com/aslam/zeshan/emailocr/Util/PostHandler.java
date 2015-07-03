@@ -1,8 +1,12 @@
 package com.aslam.zeshan.emailocr.Util;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 
+import com.aslam.zeshan.emailocr.PostActivity;
+import com.aslam.zeshan.emailocr.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -70,7 +74,12 @@ public class PostHandler {
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String str = new String(bytes, StandardCharsets.UTF_8);
 
-                System.out.println(new JSONUtil().getText(str));
+                Intent intent = new Intent(con, PostActivity.class);
+                intent.putExtra("post", new JSONUtil().getText(str));
+
+                con.startActivity(intent);
+                ((Activity)con).overridePendingTransition(R.transition.activity_to_1, R.transition.activity_to_2);
+
                 progressDialog.dismiss();
             }
 

@@ -12,4 +12,7 @@
 
     <string name="import_dialog">Import</string>
     <string name="import_question">Would you like to import emails from your contacts?</string>
+
+    <string name="image_view">View image</string>
+    <string name="send_email">Send email</string>
 </resources>
