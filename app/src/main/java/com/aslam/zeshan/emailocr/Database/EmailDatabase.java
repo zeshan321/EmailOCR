@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -18,7 +19,8 @@ public class EmailDatabase extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Emails";
     private static final String TABLE_CONTACTS = "EmailList";
-    private static final String KEY_NAME = "email";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_EMAIL = "email";
 
     public EmailDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -29,7 +31,7 @@ public class EmailDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
-                + "ID INTEGER PRIMARY KEY   AUTOINCREMENT," + KEY_NAME + " TEXT)";
+                + "ID INTEGER PRIMARY KEY   AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_EMAIL + " TEXT)";
 
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
@@ -38,11 +40,12 @@ public class EmailDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    public void addEmail(String email) {
+    public void addEmail(String name, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, email);
+        values.put(KEY_NAME, name);
+        values.put(KEY_EMAIL, email);
 
         db.insert(TABLE_CONTACTS, null, values);
         db.close();
@@ -54,8 +57,8 @@ public class EmailDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<String> getEmails() {
-        List<String> emails = new ArrayList<>();
+    public HashMap getEmails() {
+        HashMap<String, String> map = new HashMap<>();
         try {
             String selectQuery = "SELECT * FROM ( SELECT * FROM " + TABLE_CONTACTS + " ORDER BY ID DESC) sub ORDER BY ID ASC";
 
@@ -64,9 +67,10 @@ public class EmailDatabase extends SQLiteOpenHelper {
 
             if (cursor != null && cursor.moveToFirst()) {
                 while (!cursor.isAfterLast()) {
-                    String email = cursor.getString(cursor.getColumnIndex(KEY_NAME));
+                    String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
+                    String ID = cursor.getString(cursor.getColumnIndex(KEY_EMAIL));
 
-                    emails.add(email);
+                    map.put(name, ID);
                     cursor.moveToNext();
                 }
             }
@@ -75,8 +79,24 @@ public class EmailDatabase extends SQLiteOpenHelper {
             db.close();
         } catch (SQLiteException e) {
             e.printStackTrace();
-            return emails;
+            return map;
         }
-        return emails;
+        return map;
+
+    }
+
+    public boolean contains(String email) {
+        String selectQuery = "SELECT * FROM " + TABLE_CONTACTS + " WHERE  email = ?";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{email});
+
+        if (cursor.getCount() > 0) {
+            cursor.close();
+            return true;
+        }
+
+        cursor.close();
+        return false;
     }
 }

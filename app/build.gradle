@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile files('libs/android-async-http-1.4.6.jar')
     compile 'com.getbase:floatingactionbutton:1.9.1'
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }

@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/main"
             fab:fab_icon="@drawable/ic_fa_camera"
-            fab:fab_title="Take Pic"
+            fab:fab_title="OCR"
             fab:fab_colorPressed="@color/main"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
