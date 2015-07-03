@@ -2,7 +2,9 @@ package com.aslam.zeshan.emailocr;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
@@ -13,6 +15,11 @@ import android.view.MenuItem;
 import com.aslam.zeshan.emailocr.Adapter.ListHandler;
 import com.aslam.zeshan.emailocr.Listeners.FloatListener;
 import com.aslam.zeshan.emailocr.Util.EmailImport;
+import com.aslam.zeshan.emailocr.Util.FilePath;
+import com.aslam.zeshan.emailocr.Util.PostHandler;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -31,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
         new EmailImport(this, false).setup();
 
         new FloatListener(this).addEmail();
-
+        new FloatListener(this).getImage();
     }
 
     @Override
@@ -98,6 +105,39 @@ public class MainActivity extends ActionBarActivity {
             searchView.setIconified(true);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 3:
+                    File f = new File(Environment.getExternalStorageDirectory().toString());
+                    for (final File temp : f.listFiles()) {
+                        if (temp.getName().equals("temp.jpg")) {
+                            f = temp;
+                            try {
+                                PostHandler postHandler = new PostHandler(con, f);
+                                postHandler.uploadFile();
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    break;
+                case 4:
+                    f = new File(new FilePath(this, data.getData()).getPath());
+                    try {
+                        PostHandler postHandler = new PostHandler(con, f);
+                        postHandler.uploadFile();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
         }
     }
 }

@@ -23,7 +23,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:textColor="@color/main"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/import_question"

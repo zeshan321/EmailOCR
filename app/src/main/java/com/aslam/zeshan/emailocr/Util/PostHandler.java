@@ -70,7 +70,7 @@ public class PostHandler {
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String str = new String(bytes, StandardCharsets.UTF_8);
 
-                // Test: new JSONUtil().getText(str)
+                System.out.println(new JSONUtil().getText(str));
                 progressDialog.dismiss();
             }
 
