@@ -14,5 +14,5 @@
     <string name="import_question">Would you like to import emails from your contacts?</string>
 
     <string name="image_view">View image</string>
-    <string name="send_email">Send email</string>
+    <string name="next_email">Next</string>
 </resources>

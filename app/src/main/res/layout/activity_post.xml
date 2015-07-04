@@ -35,7 +35,7 @@
             android:background="@color/main"
             android:textColor="@color/white"
             android:layout_weight="1"
-            android:text="@string/send_email"
+            android:text="@string/next_email"
             style="?android:attr/borderlessButtonStyle">
         </Button>
         </LinearLayout>

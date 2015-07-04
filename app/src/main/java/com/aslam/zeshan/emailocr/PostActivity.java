@@ -7,6 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.aslam.zeshan.emailocr.Listeners.PostButtons;
+
+import java.io.File;
+
+
 public class PostActivity extends ActionBarActivity {
 
     @Override
@@ -22,6 +27,9 @@ public class PostActivity extends ActionBarActivity {
 
         TextView textView = (TextView) findViewById(R.id.postText);
         textView.setText(text);
+
+        // Button listeners
+        new PostButtons(this).viewImage(new File(path));
     }
 
     @Override

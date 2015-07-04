@@ -25,4 +25,5 @@ dependencies {
     compile files('libs/android-async-http-1.4.6.jar')
     compile 'com.getbase:floatingactionbutton:1.9.1'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    compile 'com.github.chrisbanes.photoview:library:1.2.3'
 }
