@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.aslam.zeshan.emailocr.Adapter.ListHandler;
+import com.aslam.zeshan.emailocr.Dialog.SentDialog;
 import com.aslam.zeshan.emailocr.Listeners.FloatListener;
 import com.aslam.zeshan.emailocr.Util.EmailImport;
 import com.aslam.zeshan.emailocr.Util.FilePath;
@@ -34,9 +35,18 @@ public class MainActivity extends ActionBarActivity {
 
         this.con = this;
 
-        new ListHandler(this).initialSetup();
+        // Intent data
+        Intent intent = getIntent();
+        if (intent.getBooleanExtra("emailSent", false)) {
+            // Show sent dialog
+            new SentDialog(this).show(intent.getStringExtra("post"), intent.getStringExtra("path"));
+        }
+
+        // List and first time email import
+        new ListHandler(this).initialSetup(false);
         new EmailImport(this, false).setup();
 
+        // Button listeners
         new FloatListener(this).addEmail();
         new FloatListener(this).getImage();
     }
@@ -82,6 +92,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
 
         menu.add(1, 1, 1, "Import emails");
         return super.onCreateOptionsMenu(menu);

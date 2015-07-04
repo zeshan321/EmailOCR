@@ -35,6 +35,7 @@
         </activity>
 
         <activity android:name=".PostActivity"></activity>
+        <activity android:name=".SendActivity"></activity>
     </application>
 
 </manifest>

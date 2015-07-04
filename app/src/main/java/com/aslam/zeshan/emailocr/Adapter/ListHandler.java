@@ -20,9 +20,14 @@ public class ListHandler {
         this.con = con;
     }
 
-    public void initialSetup() {
-        emailsArrayAdapater = new EmailsArrayAdapter(con, R.layout.email_list_view);
-        listView = (ListView) ((Activity) con).findViewById(R.id.emailList);
+    public void initialSetup(boolean type) {
+        if (!type) {
+            emailsArrayAdapater = new EmailsArrayAdapter(con, R.layout.email_list_view);
+            listView = (ListView) ((Activity) con).findViewById(R.id.emailList);
+        } else {
+            emailsArrayAdapater = new EmailsArrayAdapter(con, R.layout.email_list_view);
+            listView = (ListView) ((Activity) con).findViewById(R.id.sendList);
+        }
 
         EmailDatabase emailDatabase = new EmailDatabase(con);
 

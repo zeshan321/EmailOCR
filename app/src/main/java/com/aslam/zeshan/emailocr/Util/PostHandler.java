@@ -58,9 +58,7 @@ public class PostHandler {
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                String str = new String(bytes, StandardCharsets.UTF_8);
-
-                progressDialog.setMessage("Failed! " + str);
+                 progressDialog.setMessage("Failed!" );
             }
         });
     }
@@ -86,9 +84,7 @@ public class PostHandler {
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                String str = new String(bytes, StandardCharsets.UTF_8);
-
-                progressDialog.setMessage("Failed! " + str);
+                 progressDialog.setMessage("Failed!");
             }
         });
     }

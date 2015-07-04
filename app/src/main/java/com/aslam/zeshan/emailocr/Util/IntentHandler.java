@@ -45,6 +45,6 @@ public class IntentHandler {
         uris.add(Uri.fromFile(file));
         intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
 
-        ((Activity)con).startActivityForResult(Intent.createChooser(intent, "Select Email"), 5);
+        ((Activity)con).startActivityForResult(Intent.createChooser(intent, "Send Email"), 5);
     }
 }

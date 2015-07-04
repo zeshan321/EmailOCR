@@ -19,17 +19,22 @@ public class PostActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+        // Action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Intent data
         Intent intent = getIntent();
         String text = intent.getStringExtra("post");
         String path = intent.getStringExtra("path");
 
+        // Display converted text
         TextView textView = (TextView) findViewById(R.id.postText);
         textView.setText(text);
 
         // Button listeners
-        new PostButtons(this).viewImage(new File(path));
+        PostButtons postButtons = new PostButtons(this);
+        postButtons.viewImage(new File(path));
+        postButtons.sendText(text, path);
     }
 
     @Override
@@ -40,6 +45,7 @@ public class PostActivity extends ActionBarActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                 startActivity(intent);
                 overridePendingTransition(R.transition.activity_from_1, R.transition.activity_from_2);
+                finish();
                 return true;
             case 1:
                 return true;
@@ -48,16 +54,11 @@ public class PostActivity extends ActionBarActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(1, 1, 1, "Settings");
-
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.transition.activity_from_1, R.transition.activity_from_2);
+        finish();
     }
 }

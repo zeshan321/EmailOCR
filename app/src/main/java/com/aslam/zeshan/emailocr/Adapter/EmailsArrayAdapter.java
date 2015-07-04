@@ -32,8 +32,6 @@ public class EmailsArrayAdapter extends ArrayAdapter<EmailObject> {
     ImageView imageLetter;
     ImageView imageCheck;
 
-    private Filter filter;
-
 
     public EmailsArrayAdapter(Context con, int resource) {
         super(con, resource);
@@ -88,9 +86,11 @@ public class EmailsArrayAdapter extends ArrayAdapter<EmailObject> {
         name.setText(emailObject.name);
 
         if (emailObject.selected) {
+            imageLetter.setVisibility(View.GONE);
             imageCheck.setVisibility(View.VISIBLE);
         } else {
             imageCheck.setVisibility(View.GONE);
+            imageLetter.setVisibility(View.VISIBLE);
         }
 
         ColorGenerator generator = ColorGenerator.DEFAULT;
@@ -105,15 +105,15 @@ public class EmailsArrayAdapter extends ArrayAdapter<EmailObject> {
                 .endConfig()
                 .buildRect(s, color2);
 
-        imageLetter.setImageDrawable(drawable);
 
         TextDrawable drawable1 = TextDrawable.builder()
                 .beginConfig()
                 .width(97)
                 .height(97)
                 .endConfig()
-                .buildRound("\u2714", con.getResources().getColor(R.color.main));
+                .buildRect("\u2714", con.getResources().getColor(R.color.main));
 
+        imageLetter.setImageDrawable(drawable);
         imageCheck.setImageDrawable(drawable1);
 
         return row;

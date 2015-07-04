@@ -11,7 +11,7 @@
         android:layout_height="64dp"
         android:scaleType="center"
         android:background="@color/main"
-        android:text="@string/import_dialog"
+        android:text="@string/email_sent"
         android:contentDescription="@string/app_name"
         android:textColor="#FFFF"
         android:textStyle="bold"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/main"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/import_question"
+        android:text="@string/email_text"
         android:gravity="center_horizontal"
         android:id="@+id/textView"
         android:layout_gravity="center" />
