@@ -18,6 +18,7 @@ public class PostActivity extends ActionBarActivity {
 
         Intent intent = getIntent();
         String text = intent.getStringExtra("post");
+        String path = intent.getStringExtra("path");
 
         TextView textView = (TextView) findViewById(R.id.postText);
         textView.setText(text);

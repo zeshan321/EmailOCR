@@ -76,6 +76,7 @@ public class PostHandler {
 
                 Intent intent = new Intent(con, PostActivity.class);
                 intent.putExtra("post", new JSONUtil().getText(str));
+                intent.putExtra("path", file.getAbsolutePath());
 
                 con.startActivity(intent);
                 ((Activity)con).overridePendingTransition(R.transition.activity_to_1, R.transition.activity_to_2);
