@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.aslam.zeshan.emailocr.Adapter.ListHandler;
 import com.aslam.zeshan.emailocr.Dialog.SentDialog;
 import com.aslam.zeshan.emailocr.Listeners.FloatListener;
+import com.aslam.zeshan.emailocr.Listeners.SendListListener;
 import com.aslam.zeshan.emailocr.Util.EmailImport;
 import com.aslam.zeshan.emailocr.Util.FilePath;
 import com.aslam.zeshan.emailocr.Util.PostHandler;
@@ -38,6 +39,9 @@ public class MainActivity extends ActionBarActivity {
         // Intent data
         Intent intent = getIntent();
         if (intent.getBooleanExtra("emailSent", false)) {
+            // Clean up old data
+            SendListListener.selectedEmails.clear();
+
             // Show sent dialog
             new SentDialog(this).show(intent.getStringExtra("post"), intent.getStringExtra("path"));
         }
@@ -92,8 +96,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.clear();
-
         menu.add(1, 1, 1, "Import emails");
         return super.onCreateOptionsMenu(menu);
     }

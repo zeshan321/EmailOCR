@@ -12,12 +12,8 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.aslam.zeshan.emailocr.Adapter.ListHandler;
-import com.aslam.zeshan.emailocr.Database.EmailDatabase;
 import com.aslam.zeshan.emailocr.R;
-import com.aslam.zeshan.emailocr.Util.StringUtil;
 
 import java.io.File;
 import java.io.IOException;

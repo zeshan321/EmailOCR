@@ -32,6 +32,9 @@ public class SendActivity extends ActionBarActivity {
 
         this.con = this;
 
+        // Clean up old data
+        SendListListener.selectedEmails.clear();
+
         // Action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Selected: 0");

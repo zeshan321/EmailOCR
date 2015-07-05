@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.aslam.zeshan.emailocr.Adapter.EmailObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,20 +59,32 @@ public class EmailDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
-    public HashMap getEmails() {
-        HashMap<String, String> map = new HashMap<>();
+    public void update(int id, String name, String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, name);
+        values.put(KEY_EMAIL, email);
+
+        db.update(TABLE_CONTACTS, values, "ID=?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    public List<EmailObject> getEmails() {
+       List<EmailObject> map = new ArrayList<>();
         try {
-            String selectQuery = "SELECT * FROM ( SELECT * FROM " + TABLE_CONTACTS + " ORDER BY ID DESC) sub ORDER BY ID ASC";
+            String selectQuery = "SELECT * FROM " + TABLE_CONTACTS;
 
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = db.rawQuery(selectQuery, null);
 
             if (cursor != null && cursor.moveToFirst()) {
                 while (!cursor.isAfterLast()) {
+                    int ID = cursor.getInt(cursor.getColumnIndex("ID"));
                     String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
-                    String ID = cursor.getString(cursor.getColumnIndex(KEY_EMAIL));
+                    String email = cursor.getString(cursor.getColumnIndex(KEY_EMAIL));
 
-                    map.put(name, ID);
+                    map.add(new EmailObject(ID, name, email, false));
                     cursor.moveToNext();
                 }
             }
@@ -83,6 +97,20 @@ public class EmailDatabase extends SQLiteOpenHelper {
         }
         return map;
 
+    }
+
+    public int lastID() {
+        String selectQuery = "SELECT * FROM " + TABLE_CONTACTS;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToLast();
+
+        int ID = cursor.getInt(cursor.getColumnIndex("ID"));
+
+        cursor.close();
+        db.close();
+        return ID;
     }
 
     public boolean contains(String email) {

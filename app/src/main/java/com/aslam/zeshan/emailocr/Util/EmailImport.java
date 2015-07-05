@@ -44,7 +44,7 @@ public class EmailImport {
                 public void onClick(DialogInterface dialog, int id) {
                     new Thread(new Runnable() {
                         public void run() {
-                            EmailDatabase emailDatabase = new EmailDatabase(con);
+                            final EmailDatabase emailDatabase = new EmailDatabase(con);
                             for (String s : getNameEmailDetails()) {
                                 final String[] sp = s.split(" <s> ");
 
@@ -53,7 +53,7 @@ public class EmailImport {
                                     emailDatabase.addEmail(sp[0], sp[1]);
                                     ((Activity) con).runOnUiThread(new Runnable() {
                                         public void run() {
-                                            new ListHandler(con).add(sp[0], sp[1]);
+                                            new ListHandler(con).add(emailDatabase.lastID(), sp[0], sp[1]);
                                         }
                                     });
                                 }

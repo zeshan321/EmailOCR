@@ -41,7 +41,7 @@ public class EmailDialog {
                 EmailDatabase emailDatabase = new EmailDatabase(con);
                 emailDatabase.addEmail(name, email);
 
-                new ListHandler(con).add(name, email);
+                new ListHandler(con).add(emailDatabase.lastID(), name, email);
             }
 
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

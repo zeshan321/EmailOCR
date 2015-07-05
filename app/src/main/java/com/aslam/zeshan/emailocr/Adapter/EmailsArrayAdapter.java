@@ -163,7 +163,6 @@ public class EmailsArrayAdapter extends ArrayAdapter<EmailObject> {
             filterResults.count = tempList.size();
             last = constraint.toString();
 
-            System.out.println(filterResults.count);
             return filterResults;
         }
 

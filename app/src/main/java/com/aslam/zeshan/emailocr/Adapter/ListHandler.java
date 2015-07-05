@@ -7,8 +7,6 @@ import android.widget.ListView;
 import com.aslam.zeshan.emailocr.Database.EmailDatabase;
 import com.aslam.zeshan.emailocr.R;
 
-import java.util.HashMap;
-
 public class ListHandler {
 
     public static EmailsArrayAdapter emailsArrayAdapater;
@@ -31,16 +29,15 @@ public class ListHandler {
 
         EmailDatabase emailDatabase = new EmailDatabase(con);
 
-        HashMap<String, String> map = emailDatabase.getEmails();
-        for (String key : map.keySet()) {
-            emailsArrayAdapater.add(new EmailObject(key, map.get(key), false));
+        for (EmailObject emailObject : emailDatabase.getEmails()) {
+            emailsArrayAdapater.add(emailObject);
         }
 
         listView.setAdapter(emailsArrayAdapater);
     }
 
-    public void add(String name, String email) {
-        emailsArrayAdapater.add(new EmailObject(name, email, false));
+    public void add(int ID, String name, String email) {
+        emailsArrayAdapater.add(new EmailObject(ID, name, email, false));
 
         emailsArrayAdapater.notifyDataSetChanged();
     }
