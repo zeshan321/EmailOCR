@@ -1,5 +1,6 @@
 package com.aslam.zeshan.emailocr;
 
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import com.aslam.zeshan.emailocr.Listeners.SendListListener;
 import com.aslam.zeshan.emailocr.Util.EmailImport;
 import com.aslam.zeshan.emailocr.Util.FilePath;
 import com.aslam.zeshan.emailocr.Util.PostHandler;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.io.File;
 import java.io.IOException;
@@ -130,6 +132,12 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
+        FloatingActionsMenu actionM = (FloatingActionsMenu) ((Activity) con).findViewById(R.id.multiple_actions);
+        if (actionM.isExpanded()) {
+            actionM.collapse();
+            return;
+        }
+
         if (!searchView.isIconified()) {
             searchView.setIconified(true);
         } else {

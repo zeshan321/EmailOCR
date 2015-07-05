@@ -1,10 +1,8 @@
 package com.aslam.zeshan.emailocr.Dialog;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +14,6 @@ import android.widget.Toast;
 import com.aslam.zeshan.emailocr.Adapter.EmailObject;
 import com.aslam.zeshan.emailocr.Adapter.ListHandler;
 import com.aslam.zeshan.emailocr.Database.EmailDatabase;
-import com.aslam.zeshan.emailocr.PostActivity;
 import com.aslam.zeshan.emailocr.R;
 import com.aslam.zeshan.emailocr.Util.StringUtil;
 import com.aslam.zeshan.emailocr.Util.ToastUtil;
