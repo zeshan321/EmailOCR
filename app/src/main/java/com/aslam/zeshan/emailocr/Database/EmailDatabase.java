@@ -73,7 +73,7 @@ public class EmailDatabase extends SQLiteOpenHelper {
     public List<EmailObject> getEmails() {
        List<EmailObject> map = new ArrayList<>();
         try {
-            String selectQuery = "SELECT * FROM " + TABLE_CONTACTS;
+            String selectQuery = "SELECT * FROM " + TABLE_CONTACTS + " ORDER BY " + KEY_NAME;
 
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = db.rawQuery(selectQuery, null);

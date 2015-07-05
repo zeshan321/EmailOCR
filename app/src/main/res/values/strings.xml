@@ -19,4 +19,9 @@
 
     <string name="email_sent">Email Sent</string>
     <string name="email_text">Email has been sent!</string>
+
+    <string name="email_not_valid">Email not valid!</string>
+    <string name="name_not_valid">Name not valid!</string>
+
+    <string name="options_menu">Options</string>
 </resources>

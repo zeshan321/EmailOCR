@@ -146,8 +146,11 @@ public class EmailsArrayAdapter extends ArrayAdapter<EmailObject> {
 
             if (new StringUtil().checkString(constraint.toString())) {
                 for (EmailObject emailObject : emailsList) {
+
                     String name = emailObject.name.toLowerCase();
-                    if (name.contains(constraint.toString().toLowerCase())) {
+                    String email = emailObject.email.toLowerCase();
+
+                    if (name.contains(constraint.toString().toLowerCase()) || email.contains(constraint.toString().toLowerCase())) {
                         tempList.add(emailObject);
                     }
                 }

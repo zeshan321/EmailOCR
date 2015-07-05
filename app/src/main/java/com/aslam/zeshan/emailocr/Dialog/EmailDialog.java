@@ -6,11 +6,13 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aslam.zeshan.emailocr.Adapter.ListHandler;
 import com.aslam.zeshan.emailocr.Database.EmailDatabase;
 import com.aslam.zeshan.emailocr.R;
 import com.aslam.zeshan.emailocr.Util.StringUtil;
+import com.aslam.zeshan.emailocr.Util.ToastUtil;
 
 public class EmailDialog {
 
@@ -31,17 +33,7 @@ public class EmailDialog {
         builder.setView(v).setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                String name = nameView.getText().toString();
-                String email = emailView.getText().toString();
-
-                if (!new StringUtil().checkString(name) || !new StringUtil().checkString(email)) {
-                    return;
-                }
-
-                EmailDatabase emailDatabase = new EmailDatabase(con);
-                emailDatabase.addEmail(name, email);
-
-                new ListHandler(con).add(emailDatabase.lastID(), name, email);
+                // Nothing
             }
 
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -51,7 +43,32 @@ public class EmailDialog {
             }
         });
 
-        builder.create();
-        builder.show();
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameView.getText().toString();
+                String email = emailView.getText().toString();
+
+                if (!new StringUtil().checkString(name)) {
+                    new ToastUtil(con, con.getResources().getString(R.string.name_not_valid), Toast.LENGTH_SHORT).sendToast();
+                    return;
+                }
+
+                if (!new StringUtil().isEmail(email)) {
+                    new ToastUtil(con, con.getResources().getString(R.string.email_not_valid), Toast.LENGTH_SHORT).sendToast();
+                    return;
+                }
+
+                EmailDatabase emailDatabase = new EmailDatabase(con);
+                emailDatabase.addEmail(name, email);
+
+                new ListHandler(con).add(emailDatabase.lastID(), name, email);
+
+                dialog.dismiss();
+            }
+        });
     }
 }

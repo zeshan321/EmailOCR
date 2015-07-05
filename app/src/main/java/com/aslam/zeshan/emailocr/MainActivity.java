@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.aslam.zeshan.emailocr.Adapter.ListHandler;
 import com.aslam.zeshan.emailocr.Dialog.SentDialog;
 import com.aslam.zeshan.emailocr.Listeners.FloatListener;
+import com.aslam.zeshan.emailocr.Listeners.MainListListener;
 import com.aslam.zeshan.emailocr.Listeners.SendListListener;
 import com.aslam.zeshan.emailocr.Util.EmailImport;
 import com.aslam.zeshan.emailocr.Util.FilePath;
@@ -53,6 +54,9 @@ public class MainActivity extends ActionBarActivity {
         // Button listeners
         new FloatListener(this).addEmail();
         new FloatListener(this).getImage();
+
+        // Listview listener
+        new MainListListener(this).onClick();
     }
 
     @Override

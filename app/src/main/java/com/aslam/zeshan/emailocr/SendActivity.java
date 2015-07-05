@@ -111,8 +111,12 @@ public class SendActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.transition.activity_from_1, R.transition.activity_from_2);
-        finish();
+        if (!searchView.isIconified()) {
+            searchView.setIconified(true);
+        } else {
+            super.onBackPressed();
+            overridePendingTransition(R.transition.activity_from_1, R.transition.activity_from_2);
+            finish();
+        }
     }
 }
