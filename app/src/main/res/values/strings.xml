@@ -24,4 +24,5 @@
     <string name="name_not_valid">Name not valid!</string>
 
     <string name="options_menu">Options</string>
+    <string name="lang_menu">Language</string>
 </resources>

@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.aslam.zeshan.emailocr.Adapter.ListHandler;
+import com.aslam.zeshan.emailocr.Dialog.LangDialog;
 import com.aslam.zeshan.emailocr.Dialog.SentDialog;
 import com.aslam.zeshan.emailocr.Listeners.FloatListener;
 import com.aslam.zeshan.emailocr.Listeners.MainListListener;
@@ -29,6 +30,8 @@ public class MainActivity extends ActionBarActivity {
 
     Context con;
     SearchView searchView;
+
+    boolean menu = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +103,11 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.add(1, 1, 1, "Import emails");
+        if (!this.menu) {
+            this.menu = true;
+            menu.add(1, 1, 1, "Import emails");
+            menu.add(2, 2, 2, "Language settings");
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -110,6 +117,11 @@ public class MainActivity extends ActionBarActivity {
 
         if (id == 1) {
             new EmailImport(this, true).setup();
+            return true;
+        }
+
+        if (id == 2) {
+            new LangDialog(this).show();
             return true;
         }
 

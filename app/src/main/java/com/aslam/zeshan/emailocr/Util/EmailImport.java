@@ -32,6 +32,10 @@ public class EmailImport {
     public void setup() {
         SettingsManager settingsManager = new SettingsManager(con);
 
+        if (!settingsManager.contains("firstTime")) {
+            new SettingsManager(con).set("lang", 17);
+        }
+
         if (!settingsManager.contains("firstTime") || force) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(con);
@@ -44,16 +48,15 @@ public class EmailImport {
                 public void onClick(DialogInterface dialog, int id) {
                     new Thread(new Runnable() {
                         public void run() {
-                            final EmailDatabase emailDatabase = new EmailDatabase(con);
                             for (String s : getNameEmailDetails()) {
                                 final String[] sp = s.split(" <s> ");
 
-                                if (!emailDatabase.contains(sp[1])) {
+                                if (!new EmailDatabase(con).contains(sp[1])) {
 
-                                    emailDatabase.addEmail(sp[0], sp[1]);
+                                    new EmailDatabase(con).addEmail(sp[0], sp[1]);
                                     ((Activity) con).runOnUiThread(new Runnable() {
                                         public void run() {
-                                            new ListHandler(con).add(emailDatabase.lastID(), sp[0], sp[1]);
+                                            new ListHandler(con).add(new EmailDatabase(con).lastID(), sp[0], sp[1]);
                                         }
                                     });
                                 }

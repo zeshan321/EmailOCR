@@ -66,7 +66,8 @@ public class PostHandler {
     private void getText() throws IOException {
         AsyncHttpClient client = new AsyncHttpClient();
 
-        String URL = "http://api.newocr.com/v1/ocr?key=fdfa2801261915bb84f9e9379f740f6f&file_id=" + ID + "&page=1&lang=eng&psm=6";
+        String langType = new LangUtil().toSort(new SettingsManager(con).getInt("lang"));
+        String URL = "http://api.newocr.com/v1/ocr?key=fdfa2801261915bb84f9e9379f740f6f&file_id=" + ID + "&page=1&lang=" + langType + "&psm=6";
         client.get(URL, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
