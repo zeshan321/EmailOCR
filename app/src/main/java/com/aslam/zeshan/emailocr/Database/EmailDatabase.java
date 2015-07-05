@@ -53,9 +53,9 @@ public class EmailDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteEmail(String email) {
+    public void deleteEmail(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_CONTACTS, "groupID = ?", new String[]{email});
+        db.delete(TABLE_CONTACTS, "ID = ?", new String[]{String.valueOf(id)});
         db.close();
     }
 

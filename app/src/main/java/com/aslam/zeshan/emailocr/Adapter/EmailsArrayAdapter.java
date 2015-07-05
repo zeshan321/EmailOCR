@@ -52,6 +52,12 @@ public class EmailsArrayAdapter extends ArrayAdapter<EmailObject> {
         super.clear();
     }
 
+    @Override
+    public void remove(EmailObject object) {
+        emailsList.remove(object);
+        super.remove(object);
+    }
+
     public void add(int i, EmailObject object) {
         emailsList.add(i, object);
     }

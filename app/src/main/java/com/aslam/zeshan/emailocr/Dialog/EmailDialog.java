@@ -46,6 +46,7 @@ public class EmailDialog {
         final AlertDialog dialog = builder.create();
         dialog.show();
 
+
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
